@@ -5,9 +5,9 @@ package v1
 import (
 	context "context"
 
-	applyconfigurationappscoderefatdevv1 "github.com/refat75/api-server-controller/pkg/generated/applyconfiguration/appscode.refat.dev/v1"
-	scheme "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned/scheme"
-	appscoderefatdevv1 "github.com/refat75/apiservercontroller/pkg/apis/appscode.refat.dev/v1"
+	appscoderefatdevv1 "github.com/refat75/apiServerController/pkg/apis/appscode.refat.dev/v1"
+	applyconfigurationappscoderefatdevv1 "github.com/refat75/apiServerController/pkg/generated/applyconfiguration/appscode.refat.dev/v1"
+	scheme "github.com/refat75/apiServerController/pkg/generated/clientset/versioned/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"

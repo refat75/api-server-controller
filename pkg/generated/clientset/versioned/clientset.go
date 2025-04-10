@@ -6,7 +6,7 @@ import (
 	fmt "fmt"
 	http "net/http"
 
-	appscodev1 "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
+	appscodev1 "github.com/refat75/apiServerController/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

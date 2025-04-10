@@ -3,9 +3,9 @@
 package fake
 
 import (
-	appscoderefatdevv1 "github.com/refat75/api-server-controller/pkg/generated/applyconfiguration/appscode.refat.dev/v1"
-	typedappscoderefatdevv1 "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
-	v1 "github.com/refat75/apiservercontroller/pkg/apis/appscode.refat.dev/v1"
+	v1 "github.com/refat75/apiServerController/pkg/apis/appscode.refat.dev/v1"
+	appscoderefatdevv1 "github.com/refat75/apiServerController/pkg/generated/applyconfiguration/appscode.refat.dev/v1"
+	typedappscoderefatdevv1 "github.com/refat75/apiServerController/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
 	gentype "k8s.io/client-go/gentype"
 )
 

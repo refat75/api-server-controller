@@ -5,7 +5,7 @@ package externalversions
 import (
 	fmt "fmt"
 
-	v1 "github.com/refat75/apiservercontroller/pkg/apis/appscode.refat.dev/v1"
+	v1 "github.com/refat75/apiServerController/pkg/apis/appscode.refat.dev/v1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )

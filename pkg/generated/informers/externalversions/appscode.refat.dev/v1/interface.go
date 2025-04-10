@@ -3,7 +3,7 @@
 package v1
 
 import (
-	internalinterfaces "github.com/refat75/api-server-controller/pkg/generated/informers/externalversions/internalinterfaces"
+	internalinterfaces "github.com/refat75/apiServerController/pkg/generated/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to all the informers in this group version.

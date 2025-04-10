@@ -1,0 +1,21 @@
+apiVersion: v1
+items:
+- apiVersion: appscode.refat.dev/v1
+  kind: Apiserver
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"appscode.refat.dev/v1","kind":"Apiserver","metadata":{"annotations":{},"name":"my-apiserver","namespace":"apiserver"},"spec":{"image":"refat0/api-server:latest","port":8080,"replicas":1}}
+    creationTimestamp: "2025-04-10T10:46:15Z"
+    generation: 1
+    name: my-apiserver
+    namespace: apiserver
+    resourceVersion: "1032016"
+    uid: 34b8f0b8-4c69-47ad-92c7-897e27f44b5c
+  spec:
+    image: refat0/api-server:latest
+    port: 8080
+    replicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
