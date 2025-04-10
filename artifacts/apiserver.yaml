@@ -1,0 +1,9 @@
+apiVersion: appscode.refat.dev/v1
+kind: Apiserver
+metadata:
+  name: my-apiserver
+  namespace: apiserver
+spec:
+  image: refat0/api-server:latest
+  replicas: 1
+  port: 8080
