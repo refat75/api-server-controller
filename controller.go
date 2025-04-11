@@ -113,7 +113,6 @@ func NewController(
 			//controller.enqueueApiServer(new)
 			controller.enqueueApiServer(new)
 		},
-		DeleteFunc: controller.enqueueApiServer,
 	})
 
 	return controller
@@ -201,7 +200,6 @@ func (c *Controller) syncHandler(ctx context.Context, objectRef cache.ObjectName
 		// The apiServer resource may no longer exist, in which case we assume the reource is deleted
 		if errors.IsNotFound(err) {
 			utilruntime.HandleErrorWithContext(ctx, err, "Failed looking up Apiserver", "objectRef", objectRef)
-			logger.V(4).Info("Deleting Corresponding Deployment")
 			// Set deployment owner reference as Apiserver
 			// If custom resource is deleted, the deployment will be deleted automatically
 			return nil
@@ -209,12 +207,8 @@ func (c *Controller) syncHandler(ctx context.Context, objectRef cache.ObjectName
 		return err
 	}
 
-	// Get the unique UID of current resource
-	apiServerUid := string(apiServer.UID)
-	fmt.Println("creation Timestamp:", apiServer.CreationTimestamp)
-
-	//Get the deployment with name similar to apiServerUid
-	deployment, err := c.deploymentLister.Deployments(apiServer.Namespace).Get(apiServerUid)
+	//Get the deployment
+	deployment, err := c.deploymentLister.Deployments(apiServer.Namespace).Get(apiServer.Name)
 
 	//If the resource doesn't exist we'll create it
 	if errors.IsNotFound(err) {
@@ -225,6 +219,7 @@ func (c *Controller) syncHandler(ctx context.Context, objectRef cache.ObjectName
 	// attempt processing again later. This could have been caused by a
 	// temporary network failure, or any other transient reason.
 	if err != nil {
+		utilruntime.HandleErrorWithContext(ctx, err, "failed to get deployment")
 		return err
 	}
 
@@ -232,8 +227,8 @@ func (c *Controller) syncHandler(ctx context.Context, objectRef cache.ObjectName
 	deploymentImage := deployment.Spec.Template.Spec.Containers[0].Image
 	deploymentPort := deployment.Spec.Template.Spec.Containers[0].Ports[0].ContainerPort
 	if *apiServer.Spec.Replicas != *deployment.Spec.Replicas || apiServer.Spec.Image != deploymentImage || apiServer.Spec.Port != deploymentPort {
-		logger.V(4).Info("Updating deployment sate to the desired sate")
-		deployment, err = c.kubeclientset.AppsV1().Deployments(apiServer.Namespace).Create(ctx, newDeployment(apiServer), metav1.CreateOptions{FieldManager: FieldManager})
+		logger.V(4).Info("Updating deployment state to the desired sate")
+		deployment, err = c.kubeclientset.AppsV1().Deployments(apiServer.Namespace).Update(ctx, newDeployment(apiServer), metav1.UpdateOptions{FieldManager: FieldManager})
 	}
 
 	// If an error occurs during Update, we'll requeue the item so we can
@@ -260,12 +255,15 @@ func (c *Controller) enqueueApiServer(obj interface{}) {
 func newDeployment(apiServer *customv1.Apiserver) *appsv1.Deployment {
 	labels := map[string]string{
 		"app":        "apiServer",
-		"controller": string(apiServer.UID),
+		"controller": apiServer.Name,
 	}
 	return &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      string(apiServer.UID),
+			Name:      apiServer.Name,
 			Namespace: apiServer.Namespace,
+			OwnerReferences: []metav1.OwnerReference{
+				*metav1.NewControllerRef(apiServer, customv1.SchemeGroupVersion.WithKind("Apiserver")),
+			},
 		},
 		Spec: appsv1.DeploymentSpec{
 			Replicas: apiServer.Spec.Replicas,
@@ -293,13 +291,3 @@ func newDeployment(apiServer *customv1.Apiserver) *appsv1.Deployment {
 		},
 	}
 }
-
-//func handleAdd(obj interface{}) {
-//	fmt.Println("Add called")
-//}
-//func handleUpdate(old, new interface{}) {
-//	fmt.Println("Update called")
-//}
-//func handleDelete(obj interface{}) {
-//	fmt.Println("Delete called")
-//}
