@@ -36,7 +36,7 @@ kube::codegen::gen_helpers \
 
 kube::codegen::gen_client \
   --output-dir "${PKG_ROOT}/pkg/generated" \
-  --output-pkg "github.com/refat75/api-server-controller/pkg/generated" \
+  --output-pkg "github.com/refat75/apiServerController/pkg/generated" \
   --boilerplate /dev/null \
   --with-watch \
   --with-applyconfig \

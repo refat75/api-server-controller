@@ -3,10 +3,10 @@
 package fake
 
 import (
-	applyconfiguration "github.com/refat75/api-server-controller/pkg/generated/applyconfiguration"
-	clientset "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned"
-	appscodev1 "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
-	fakeappscodev1 "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1/fake"
+	applyconfiguration "github.com/refat75/apiServerController/pkg/generated/applyconfiguration"
+	clientset "github.com/refat75/apiServerController/pkg/generated/clientset/versioned"
+	appscodev1 "github.com/refat75/apiServerController/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
+	fakeappscodev1 "github.com/refat75/apiServerController/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

@@ -3,7 +3,7 @@
 package v1
 
 import (
-	appscoderefatdevv1 "github.com/refat75/apiservercontroller/pkg/apis/appscode.refat.dev/v1"
+	appscoderefatdevv1 "github.com/refat75/apiServerController/pkg/apis/appscode.refat.dev/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	listers "k8s.io/client-go/listers"
 	cache "k8s.io/client-go/tools/cache"

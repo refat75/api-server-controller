@@ -3,7 +3,7 @@
 package fake
 
 import (
-	v1 "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
+	v1 "github.com/refat75/apiServerController/pkg/generated/clientset/versioned/typed/appscode.refat.dev/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

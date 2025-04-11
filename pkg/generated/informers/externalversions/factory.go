@@ -7,9 +7,9 @@ import (
 	sync "sync"
 	time "time"
 
-	versioned "github.com/refat75/api-server-controller/pkg/generated/clientset/versioned"
-	appscoderefatdev "github.com/refat75/api-server-controller/pkg/generated/informers/externalversions/appscode.refat.dev"
-	internalinterfaces "github.com/refat75/api-server-controller/pkg/generated/informers/externalversions/internalinterfaces"
+	versioned "github.com/refat75/apiServerController/pkg/generated/clientset/versioned"
+	appscoderefatdev "github.com/refat75/apiServerController/pkg/generated/informers/externalversions/appscode.refat.dev"
+	internalinterfaces "github.com/refat75/apiServerController/pkg/generated/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

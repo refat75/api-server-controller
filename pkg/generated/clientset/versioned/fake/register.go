@@ -3,7 +3,7 @@
 package fake
 
 import (
-	appscodev1 "github.com/refat75/apiservercontroller/pkg/apis/appscode.refat.dev/v1"
+	appscodev1 "github.com/refat75/apiServerController/pkg/apis/appscode.refat.dev/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

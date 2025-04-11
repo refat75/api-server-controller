@@ -3,9 +3,9 @@
 package applyconfiguration
 
 import (
-	appscoderefatdevv1 "github.com/refat75/api-server-controller/pkg/generated/applyconfiguration/appscode.refat.dev/v1"
-	internal "github.com/refat75/api-server-controller/pkg/generated/applyconfiguration/internal"
-	v1 "github.com/refat75/apiservercontroller/pkg/apis/appscode.refat.dev/v1"
+	v1 "github.com/refat75/apiServerController/pkg/apis/appscode.refat.dev/v1"
+	appscoderefatdevv1 "github.com/refat75/apiServerController/pkg/generated/applyconfiguration/appscode.refat.dev/v1"
+	internal "github.com/refat75/apiServerController/pkg/generated/applyconfiguration/internal"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	testing "k8s.io/client-go/testing"
