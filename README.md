@@ -25,3 +25,7 @@ kubectl get deployment --namespace=apiserver
 kubectl delete -f artifacts/apiserver.yaml
 #Corresponding Deployment also be deleted by this time
 ```
+```html
+Note: Finalizer is added. If the controller is not running then you cannot delete 
+apiserver resources.
+```
