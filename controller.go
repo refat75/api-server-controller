@@ -207,6 +207,33 @@ func (c *Controller) syncHandler(ctx context.Context, objectRef cache.ObjectName
 		return err
 	}
 
+	if apiServer.DeletionTimestamp != nil {
+		if containsString(apiServer.Finalizers, "appscode.refat.dev/finalizer") {
+			logger.Info("Apiserver is being delted, running finalizer logic")
+
+			apiServerCopy := apiServer.DeepCopy()
+			apiServerCopy.Finalizers = removeString(apiServer.Finalizers, "appscode.refat.dev/finalizer")
+			_, err := c.sampleclientset.AppscodeV1().Apiservers(apiServer.Namespace).Update(ctx, apiServerCopy, metav1.UpdateOptions{})
+
+			if err != nil {
+				logger.Info("Failed to remove finalizer", "objectName", objectRef)
+				return err
+			}
+		}
+		return nil
+	}
+
+	logger.Info("Creating Finalizer")
+	if !containsString(apiServer.Finalizers, "appscode.refat.dev/finalizer") {
+		apiServerCopy := apiServer.DeepCopy()
+		apiServerCopy.Finalizers = append(apiServerCopy.Finalizers, "appscode.refat.dev/finalizer")
+		fmt.Println(apiServerCopy.Finalizers)
+		_, err := c.sampleclientset.AppscodeV1().Apiservers(apiServer.Namespace).Update(ctx, apiServerCopy, metav1.UpdateOptions{})
+		if err != nil {
+			logger.Info(err.Error())
+		}
+	}
+
 	//Get the deployment
 	deployment, err := c.deploymentLister.Deployments(apiServer.Namespace).Get(apiServer.Name)
 
@@ -290,4 +317,23 @@ func newDeployment(apiServer *customv1.Apiserver) *appsv1.Deployment {
 			},
 		},
 	}
+}
+
+func containsString(slice []string, s string) bool {
+	for _, item := range slice {
+		if item == s {
+			return true
+		}
+	}
+	return false
+}
+
+func removeString(slice []string, s string) []string {
+	result := []string{}
+	for _, item := range slice {
+		if item != s {
+			result = append(result, item)
+		}
+	}
+	return result
 }
